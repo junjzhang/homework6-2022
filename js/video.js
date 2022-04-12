@@ -38,9 +38,38 @@ fasterButton.addEventListener("click", function () {
 
 slider.addEventListener("change", function (e) {
   if (mute.innerHTML == "Unmute") {
-    media.muted = false;
+    player.muted = false;
     mute.innerHTML = "Mute";
   }
   volume.innerHTML = e.target.value + "%";
   player.volume = e.target.value / 100;
+});
+
+skipButton.addEventListener("click", function () {
+  if (player.currentTime < player.duration - 15.001) {
+    player.currentTime += 15;
+  } else {
+    player.currentTime = 0;
+  }
+  console.log(player.currentTime);
+});
+
+muteButton.addEventListener("click", function () {
+  if (mute.innerHTML == "Mute") {
+    player.muted = true;
+    mute.innerHTML = "Unmute";
+    slider.value = 0;
+  } else {
+    player.muted = false;
+    mute.innerHTML = "Mute";
+    slider.value = player.volume * 100;
+  }
+});
+
+origStyleButton.addEventListener("click", function () {
+  player.classList.remove("oldSchool");
+});
+
+vintageStyleButton.addEventListener("click", function () {
+  player.classList.add("oldSchool");
 });
